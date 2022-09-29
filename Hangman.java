@@ -52,10 +52,22 @@ public class Hangman {
     }
 
     public boolean isGameOver() {
+        if(numberOfIncorrectTries < 6 & SecretWord.equals(knownSoFar)){
+            return true;
+        }
+        else {
+            return false;
+        }
 
     }
 
     public boolean hasLost() {
+        if (SecretWord.equals(knownSoFar)) {
+            return false;
+        }
+        else {
+            return false;
+        }
 
     }
 
