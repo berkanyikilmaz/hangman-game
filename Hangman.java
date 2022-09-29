@@ -13,32 +13,42 @@ public class Hangman {
     }
 
     public String getAllLetters() {
-        //zfsdz
-
+        return allLetters;
     }
 
     public String getUsedLetters() {
-        
+        return usedLetters;        
     }
 
     public String getUnusedLetters() {
+        return unusedLetters;
         
     }
 
     public int getNumOfIncorrectTries() {
-        
+        return numberOfIncorrectTries;
     }
 
     public int getMaxAllowedIncorrectTries() {
+        return maxAllowedIncorrectTries;        
+
         
     }
 
     public String getKnownSoFar() {
+        return knownSoFar;
         
     }
 
-    public int tryThis( /*letter */) {
-
+    public int tryThis( char c1) {
+        int count = 0;
+        for (int i = 0 ; i < SecretWord.length(); i++){
+            if (c1 == SecretWord.charAt(i)){
+                count++;
+            }
+        }
+        return count;
+              
     }
 
     public boolean isGameOver() {
