@@ -7,9 +7,12 @@ public class Hangman {
     private int numberOfIncorrectTries;
     private int maxAllowedIncorrectTries;
     private StringBuffer knownSoFar;
+    int count = (int)Math.random()*12;
 
     public Hangman() {
-
+        numberOfIncorrectTries = 0;
+        maxAllowedIncorrectTries = 6;
+        chooseSecretWord();
     }
 
     public String getAllLetters() {
@@ -41,37 +44,51 @@ public class Hangman {
     }
 
     public int tryThis( char c1) {
-        int count = 0;
-        for (int i = 0 ; i < SecretWord.length(); i++){
-            if (c1 == SecretWord.charAt(i)){
-                count++;
-            }
+        usedLetters.append(letter);
+        
+
+        int occurences = 0;
+        for (int i = 0; i < secretWord.length(); i++) {
+            if (secretWord.charAt(i) == letter) {
+                occurences++;
+                knownSofar.insert(i, letter);
+                knownSofar.setLength(secretWord.length());
+            } 
+                
+
         }
-        return count;
+        if (occurences == 0)
+            numberOfIncorrectTries++;
+        return occurences;
               
     }
 
     public boolean isGameOver() {
-        if(numberOfIncorrectTries < 6 & SecretWord.equals(knownSoFar)){
-            return true;
-        }
-        else {
-            return false;
+        if (numberOfIncorrectTries > maxAllowedIncorrectTries ||getKnownSofar().equals(secretWord.toString()))
+        return true;
+
+    else
+        return false;
         }
 
-    }
+    
 
     public boolean hasLost() {
-        if (SecretWord.equals(knownSoFar)) {
-            return false;
+        boolean lost = false;
+        if (isGameOver()) {
+            if (numberOfIncorrectTries > maxAllowedIncorrectTries)
+                lost = true;
         }
-        else {
-            return false;
+        return lost;
         }
 
-    }
+    
 
     private void chooseSecretWord() {
-        
+        secretWord.insert(0, fixedList[count]);
+        for (int i = 0; i < secretWord.length(); i++) {
+            knownSofar.append('-');
+        }
+        count++;
     }
 }
