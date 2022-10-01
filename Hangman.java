@@ -149,7 +149,7 @@ public class Hangman {
     //Method to update unusedLetters and usedLetters 
     public void updateUsedAndUnusedLetters( String playerGuess ){
         this.usedLetters.append(playerGuess);
-        this.unusedLetters.delete(unusedLetters.indexOf(playerGuess), unusedLetters.indexOf(playerGuess));
+        this.unusedLetters.delete(unusedLetters.indexOf(playerGuess), unusedLetters.indexOf(playerGuess) + 1);
     }
 
 }
