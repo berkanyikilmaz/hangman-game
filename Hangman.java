@@ -21,12 +21,7 @@ public class Hangman {
         this.knownSoFar = new StringBuffer();
         this.gameMode = gameMode;
 
-        if (gameMode == 1) {
-            maxAllowedIncorrectTries = 6;
-        }
-        else if (gameMode == 2) {
-            maxAllowedIncorrectTries = 9;
-        }
+        maxAllowedIncorrectTries = 7;
         
         chooseSecretWord();
         hideSecretWord(this.secretWord);
@@ -82,6 +77,20 @@ public class Hangman {
         }
         if (result == 0) this.numberOfIncorrectTries++;
         return result;
+    }
+
+    public boolean predictWord( String playerGuess ) {
+        boolean isTrue = true;
+        
+        if (playerGuess.toUpperCase().equals(this.getSecretWord().toString())) {
+            this.knownSoFar = this.secretWord;
+        }
+        else {
+            this.numberOfIncorrectTries++;
+            isTrue = false;
+        }
+
+        return isTrue;
     }
 
     public boolean isGameOver() {
