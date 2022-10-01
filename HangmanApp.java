@@ -4,6 +4,8 @@ public class HangmanApp {
     
     public static void main(String[] args) {
 
+        Locale.setDefault(new Locale("en"));
+
         Scanner input = new Scanner(System.in);
         String playerGuess; 
 
@@ -29,20 +31,17 @@ public class HangmanApp {
             current.updateUsedAndUnusedLetters(playerGuess);
             if  ( occurenceOfLetter == 0 ){
                 System.out.println("Your letter is not in the secret word, please try again");
-                System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
-                System.out.println("The letters you used: " + current.getUsedLetters());
-                System.out.println(current.displayTheHangman());
-                System.out.println();
             }
 
             else if ( occurenceOfLetter > 0 ){
                 System.out.println( "Your guess is corret!");
                 current.updateKnownSoFar(playerGuess);
-                System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
-                System.out.println("The letters you used: " + current.getUsedLetters());
-                System.out.println(current.displayTheHangman());
-                System.out.println();
             }
+
+            System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
+            System.out.println("The letters you used: " + current.getUsedLetters());
+            System.out.println(current.displayTheHangman());
+            System.out.println();
         }
 
         
