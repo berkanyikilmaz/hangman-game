@@ -10,10 +10,22 @@ public class HangmanApp {
         String playerGuess; 
 
         System.out.println("Welcome to the Best Hangman Game You've Ever Seen!");
-        System.out.println("You have maximum 6 letter tries, if you exceed the limit you will lose!");
+        System.out.println("Gamemodes you can choose are \n1- Word Guessing Game\n2- Sentence Guessing Game");
+        System.out.println("Please choose which game mode you want to play: ");
+        int gameMode = input.nextInt();
+
+        if (gameMode != 1 && gameMode != 2) {
+            System.out.print("Invalid game mode, please enter a valid game mode: ");
+            gameMode = input.nextInt();
+        }
+
+        Hangman current = new Hangman(gameMode);
+
+        System.out.println();
+        input.nextLine();
+        System.out.println("You have maximum " + current.getMaxAllowedIncorrectTries() + " letter tries, if you exceed the limit you will lose!");
         System.out.println("Fasten your seatbelts, game is about to start!");
 
-        Hangman current = new Hangman();
         //System.out.println(current.secretWord);
 
         while ( !current.isGameOver() ){
@@ -50,5 +62,6 @@ public class HangmanApp {
         else  System.out.println("You have WON! CONGRATULATIONS!");
         System.out.println("Game is over! Thank you for playing our game! ");
         
+        input.close();
     }
 }

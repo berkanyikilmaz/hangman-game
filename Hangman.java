@@ -9,17 +9,26 @@ public class Hangman {
     private int numberOfIncorrectTries;
     private int maxAllowedIncorrectTries;
     private StringBuffer knownSoFar;
-    int count = (int)Math.random()*12;
+
+    private int gameMode;
 
     //Constructor
-    public Hangman (){
+    public Hangman (int gameMode){
         this.numberOfIncorrectTries = 0;
-        maxAllowedIncorrectTries = 6;
-        chooseSecretWord();
         this.allLetters = new StringBuffer("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         this.unusedLetters = new StringBuffer("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         this.usedLetters = new StringBuffer("");
         this.knownSoFar = new StringBuffer();
+        this.gameMode = gameMode;
+
+        if (gameMode == 1) {
+            maxAllowedIncorrectTries = 6;
+        }
+        else if (gameMode == 2) {
+            maxAllowedIncorrectTries = 9;
+        }
+        
+        chooseSecretWord();
         hideSecretWord(this.secretWord);
     }
 
@@ -54,7 +63,12 @@ public class Hangman {
     //Method to hide the secretWord.
     public void hideSecretWord( StringBuffer secretWord ){
         for ( int i = 0; i < secretWord.length(); i++ ){
-            this.knownSoFar.replace(i, i+1, "_");
+            if (secretWord.charAt(i) == ' ') {
+                this.knownSoFar.replace(i, i+1, " ");
+            }
+            else {
+                this.knownSoFar.replace(i, i+1, "_");
+            }
         }
     }
 
@@ -62,7 +76,7 @@ public class Hangman {
     public int tryThis ( String letter ) {
         int result = 0;
         for ( int i = 0; i < this.secretWord.length(); i++ ){
-            if( Character.toString(this.secretWord.charAt(i)).equals(letter)  ) {
+            if( Character.toString(this.secretWord.charAt(i)).equals(letter) ) {
                 result++;
             }
         }
@@ -94,15 +108,25 @@ public class Hangman {
     }
     
     //Method to choose a secret word from a list of words.
-    public void chooseSecretWord(){
+    public void chooseSecretWord() {
         this.secretWord = new StringBuffer();
-        String[] secretWords = { "ABRUPTLY", "ABYSS", "AFFIX", "AVENUE", "BEEKEEPER", "COBWEB", "COCKINESS", 
-                                "DISAWOV", "FISHHOOK", "FOXGLOVE", "GAZEBO", "JACKPOT", "KICKSHAW", "KILOBYTE", "PAJAMA", "PIGGYBACK", 
-                                "PNEUMONIA", "SPHINX", "STRETCH", "SUBWAY", "ZIPPER", "ZODIAC", "ZOMBIE" };
         Random rand = new Random();
-        int randomIndex = rand.nextInt(secretWords.length);
 
-        this.secretWord = this.secretWord.append(secretWords[randomIndex]);
+        if (gameMode == 1) {
+            String[] secretWords = { "ABRUPTLY", "ABYSS", "AFFIX", "AVENUE", "BEEKEEPER", "COBWEB", "COCKINESS", 
+                                    "DISAWOV", "FISHHOOK", "FOXGLOVE", "GAZEBO", "JACKPOT", "KICKSHAW", "KILOBYTE", "PAJAMA", "PIGGYBACK", 
+                                    "PNEUMONIA", "SPHINX", "STRETCH", "SUBWAY", "ZIPPER", "ZODIAC", "ZOMBIE" };
+
+            int randomIndex = rand.nextInt(secretWords.length);
+            this.secretWord.append(secretWords[randomIndex]);
+        }
+        else if (gameMode == 2) {
+            String[] secretSentences = {"THE UNEXAMINED LIFE IS NOT WORTH LIVING", "ONE CANNOT STEP TWICE IN THE SAME RIVER", "THE PRICE OF GREATNESS IS RESPONSIBILITY",
+             "THE ONLY THING WE HAVE TO FEAR IS FEAR ITSELF", "WHERE THERE IS LOVE THERE IS LIFE", "THERE IS NO SIN EXCEPT STUPIDITY"};
+
+             int randomIndex = rand.nextInt(secretSentences.length);
+             this.secretWord.append(secretSentences[randomIndex]);
+        }
     }
     
     //Method to reveal known letters
