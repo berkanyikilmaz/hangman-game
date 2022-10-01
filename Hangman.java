@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Hangman {
 
-    public StringBuffer secretWord;
+    private StringBuffer secretWord;
     private StringBuffer allLetters;
     private StringBuffer unusedLetters;
     private StringBuffer usedLetters;
@@ -94,23 +94,18 @@ public class Hangman {
         return isTrue;
     }
 
-    public boolean isGameOver() {
-        if (numberOfIncorrectTries > maxAllowedIncorrectTries || getKnownSoFar().equals(secretWord.toString()))
-            return true;
-
-        else
-            return false;
-        }
-
-    public boolean hasLost() {
-        boolean lost = false;
-        if (isGameOver()) {
-            if (numberOfIncorrectTries > maxAllowedIncorrectTries)
-                lost = true;
-        }
-        return lost;
+    //Method to decide if the game is over
+    public boolean isGameOver(){
+        if( hasLost() || hasWon()) return true;
+        else return false;
     }
-    
+
+    //Method see if the player has lost or not.
+    public boolean hasLost(){
+        if ( numberOfIncorrectTries >= maxAllowedIncorrectTries ) return true;
+        return false;
+    } 
+
     //Method see if the player has won or not.
     public boolean hasWon(){
         if (this.secretWord.toString().equals(this.knownSoFar.toString())) return true;
