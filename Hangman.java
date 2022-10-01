@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Hangman {
 
-    private StringBuffer secretWord;
+    public StringBuffer secretWord;
     private StringBuffer allLetters;
     private StringBuffer unusedLetters;
     private StringBuffer usedLetters;
@@ -26,6 +26,7 @@ public class Hangman {
         chooseSecretWord();
         hideSecretWord(this.secretWord);
     }
+
 
     public String getAllLetters() {
         return this.allLetters.toString();

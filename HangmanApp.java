@@ -8,7 +8,7 @@ public class HangmanApp {
 
         Scanner input = new Scanner(System.in);
         String playerGuess; 
-        int predictionChoice;
+        int predictionChoice = 0;
 
         System.out.println("Welcome to the Best Hangman Game You've Ever Seen!");
         System.out.println("Gamemodes you can choose are \n1- Word Guessing Game\n2- Sentence Guessing Game");
@@ -31,9 +31,8 @@ public class HangmanApp {
 
         while ( !current.isGameOver() ){
             
-            
-            predictionChoice = 1;
-            
+            System.out.println(current.secretWord);
+
 
             if (predictionChoice != 1) {
 
@@ -57,23 +56,38 @@ public class HangmanApp {
                     current.updateKnownSoFar(playerGuess);
                 }
 
+                System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
+                System.out.println("The letters you used: " + current.getUsedLetters());
+                System.out.println(current.displayTheHangman());
+                System.out.print("If you want to predict the word enter 1 otherwise 0: ");
+                predictionChoice = input.nextInt();
+                System.out.println();
+                input.nextLine();
+
             }
 
             else {
                 System.out.println("Guess the secret word: ");
                 playerGuess = input.nextLine();
-                
-                current.predictWord(playerGuess);
+                if(current.predictWord(playerGuess)){
+                    System.out.println("You Are Correct! ");
+                }
+
+                else if (current.predictWord(playerGuess)){
+                    System.out.println("Wrong Guess!");
+                    System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
+                    System.out.println("The letters you used: " + current.getUsedLetters());
+                    System.out.println(current.displayTheHangman());
+                    System.out.print("If you want to predict the word enter 1 otherwise 0: ");
+                    predictionChoice = input.nextInt();
+                    System.out.println();
+                    input.nextLine();
+                } 
+
             }
 
-
-            System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
-            System.out.println("The letters you used: " + current.getUsedLetters());
-            System.out.println(current.displayTheHangman());
-            System.out.println();
         }
 
-        
         if (current.hasLost()) System.out.println("You have LOST! Your word was: " + current.getSecretWord() + "\n" + current.displayTheHangman());
 
         else  System.out.println("You have WON! CONGRATULATIONS!");
