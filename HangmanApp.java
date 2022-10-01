@@ -14,7 +14,7 @@ public class HangmanApp {
         System.out.println("Please choose which game mode you want to play: ");
         int gameMode = input.nextInt();
 
-        if (gameMode != 1 && gameMode != 2) {
+        while (gameMode != 1 && gameMode != 2) {
             System.out.print("Invalid game mode, please enter a valid game mode: ");
             gameMode = input.nextInt();
         }
