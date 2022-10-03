@@ -11,7 +11,7 @@ public class HangmanApp {
         int predictionChoice = 0;
 
         System.out.println("Welcome to the Best Hangman Game You've Ever Seen!");
-        System.out.println("Gamemodes you can choose are \n1- Word Guessing Game\n2- Sentence Guessing Game");
+        System.out.println("Game modes you can choose are \n1- Word Guessing Game\n2- Sentence Guessing Game");
         System.out.print("Please choose which game mode you want to play: ");
         int gameMode = input.nextInt();
 
@@ -71,7 +71,7 @@ public class HangmanApp {
                     System.out.println("You Are Correct! ");
                 }
 
-                else if (current.predictWord(playerGuess)){
+                else {
                     System.out.println("Wrong Guess!");
                     System.out.println( "Your Secret Word: " + current.getKnownSoFar() );
                     System.out.println("The letters you used: " + current.getUsedLetters());
